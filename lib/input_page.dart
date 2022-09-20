@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class InputPage extends StatefulWidget {
@@ -51,11 +52,14 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
+          Container(
+            color: const Color(0xFFEB1555),
+            margin: const EdgeInsets.all(10.0),
+            width: double.infinity,
+            height: 70.0,
+            child: const Center(child: Text('CALCULATE')),
+          ),
         ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: const Icon(Icons.add),
       ),
     );
   }
