@@ -10,7 +10,6 @@ class _InputPageState extends State<InputPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xFF0A0E21),
         title: const Text('BMI CALCULATOR'),
       ),
       body: Column(
@@ -19,71 +18,62 @@ class _InputPageState extends State<InputPage> {
             child: Row(
               children: [
                 Expanded(
-                  child: Container(
-                    margin: const EdgeInsets.all(15.0),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF1D1E33),
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
+                  child: ReuseAbleCard(
+                    colour: const Color(0xFF1D1E33),
                   ),
                 ),
                 Expanded(
-                  child: Container(
-                    margin: const EdgeInsets.all(15.0),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF1D1E33),
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
+                  child: ReuseAbleCard(
+                    colour: const Color(0xFF1D1E33),
                   ),
                 ),
               ],
             ),
           ),
           Expanded(
-            child: Container(
-              margin: const EdgeInsets.all(15.0),
-              decoration: BoxDecoration(
-                color: const Color(0xFF1D1E33),
-                borderRadius: BorderRadius.circular(10.0),
-              ),
+            child: ReuseAbleCard(
+              colour: const Color(0xFF1D1E33),
             ),
           ),
           Expanded(
-              child: Row(
-            children: [
-              Expanded(
-                child: Container(
-                  margin: const EdgeInsets.all(15.0),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF1D1E33),
-                    borderRadius: BorderRadius.circular(10.0),
+            child: Row(
+              children: [
+                Expanded(
+                  child: ReuseAbleCard(
+                    colour: const Color(0xFF1D1E33),
                   ),
                 ),
-              ),
-              Expanded(
-                child: Container(
-                  margin: const EdgeInsets.all(15.0),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF1D1E33),
-                    borderRadius: BorderRadius.circular(10.0),
+                Expanded(
+                  child: ReuseAbleCard(
+                    colour: const Color(0xFF1D1E33),
                   ),
                 ),
-              ),
-            ],
-          )),
+              ],
+            ),
+          ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }
 }
-// Container(
-// margin: const EdgeInsets.all(15.0),
-// decoration: BoxDecoration(
-// color: const Color(0xFF1D1E33),
-// borderRadius: BorderRadius.circular(10.0),
-// ),
-// ),
+
+class ReuseAbleCard extends StatelessWidget {
+  ReuseAbleCard({required this.colour});
+
+  late Color colour;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.all(15.0),
+      decoration: BoxDecoration(
+        color: colour,
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+    );
+  }
+}
