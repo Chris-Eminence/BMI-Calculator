@@ -1,6 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+const bottomContainerHeight = 70.0;
+const activeCardColor = Color(0xFF1D1E33);
+const bottomContainerColor = Color(0xFFEB1555);
+
 class InputPage extends StatefulWidget {
   @override
   _InputPageState createState() => _InputPageState();
@@ -20,12 +24,12 @@ class _InputPageState extends State<InputPage> {
               children: [
                 Expanded(
                   child: ReuseAbleCard(
-                    colour: const Color(0xFF1D1E33),
+                    colour: activeCardColor,
                   ),
                 ),
                 Expanded(
                   child: ReuseAbleCard(
-                    colour: const Color(0xFF1D1E33),
+                    colour: activeCardColor,
                   ),
                 ),
               ],
@@ -33,7 +37,7 @@ class _InputPageState extends State<InputPage> {
           ),
           Expanded(
             child: ReuseAbleCard(
-              colour: const Color(0xFF1D1E33),
+              colour: activeCardColor,
             ),
           ),
           Expanded(
@@ -41,22 +45,22 @@ class _InputPageState extends State<InputPage> {
               children: [
                 Expanded(
                   child: ReuseAbleCard(
-                    colour: const Color(0xFF1D1E33),
+                    colour: activeCardColor,
                   ),
                 ),
                 Expanded(
                   child: ReuseAbleCard(
-                    colour: const Color(0xFF1D1E33),
+                    colour: activeCardColor,
                   ),
                 ),
               ],
             ),
           ),
           Container(
-            color: const Color(0xFFEB1555),
+            color: bottomContainerColor,
             margin: const EdgeInsets.all(10.0),
             width: double.infinity,
-            height: 70.0,
+            height: bottomContainerHeight,
             child: const Center(child: Text('CALCULATE')),
           ),
         ],
