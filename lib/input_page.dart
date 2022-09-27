@@ -1,16 +1,13 @@
-import 'dart:ffi';
+import 'dart:html';
+
 import 'icon_content.dart';
 import 'reuseable_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-const bottomContainerHeight = 70.0;
-const activeCardColor = Color(0xFF1D1E33);
-const bottomContainerColor = Color(0xFFEB1555);
-const inActiveCardColor = Color(0xFF111328);
-
-enum Gender { male, female }
+enum Gender { male, female, noneSelected }
 
 class InputPage extends StatefulWidget {
   @override
@@ -18,30 +15,8 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  Color maleCardColor = inActiveCardColor;
-  Color femaleCardColor = inActiveCardColor;
-
-  //1 = male, 2 = female
-  void updateCardColor(Gender selectedGender) {
-    //male card pressed
-    if (selectedGender == Gender.male) {
-      if (maleCardColor == inActiveCardColor) {
-        maleCardColor = activeCardColor;
-        femaleCardColor = inActiveCardColor;
-      } else {
-        maleCardColor = inActiveCardColor;
-      }
-    }
-    if (selectedGender == Gender.female) {
-      if (femaleCardColor == inActiveCardColor) {
-        femaleCardColor = activeCardColor;
-        maleCardColor = inActiveCardColor;
-      } else {
-        femaleCardColor = inActiveCardColor;
-      }
-    }
-  }
-
+  int height = 180;
+  Gender selectedGender = Gender.noneSelected;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,6 +24,7 @@ class _InputPageState extends State<InputPage> {
         title: const Text('BMI CALCULATOR'),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Expanded(
             child: Row(
@@ -57,11 +33,13 @@ class _InputPageState extends State<InputPage> {
                   child: GestureDetector(
                     onTap: () {
                       setState(() {
-                        updateCardColor(Gender.male);
+                        selectedGender = Gender.male;
                       });
                     },
                     child: ReuseAbleCard(
-                      colour: maleCardColor,
+                      colour: selectedGender == Gender.male
+                          ? kActiveCardColor
+                          : kInActiveCardColor,
                       cardChild: IconContent(
                           icon: FontAwesomeIcons.mars, label: 'MALE'),
                     ),
@@ -71,11 +49,13 @@ class _InputPageState extends State<InputPage> {
                   child: GestureDetector(
                     onTap: () {
                       setState(() {
-                        updateCardColor(Gender.female);
+                        selectedGender = Gender.female;
                       });
                     },
                     child: ReuseAbleCard(
-                      colour: femaleCardColor,
+                      colour: selectedGender == Gender.female
+                          ? kActiveCardColor
+                          : kInActiveCardColor,
                       cardChild: IconContent(
                           icon: FontAwesomeIcons.venus, label: 'FEMALE'),
                     ),
@@ -85,11 +65,43 @@ class _InputPageState extends State<InputPage> {
             ),
           ),
           Expanded(
-            child: Container(
-              margin: const EdgeInsets.all(15.0),
-              decoration: BoxDecoration(
-                color: activeCardColor,
-                borderRadius: BorderRadius.circular(10.0),
+            child: ReuseAbleCard(
+              colour: kActiveCardColor,
+              cardChild: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    'HEIGHT',
+                    style: kLabelTextStyle,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    textBaseline: TextBaseline.alphabetic,
+                    children: [
+                      Text(
+                        height.toString(),
+                        style: kNumberTextStyle,
+                      ),
+                      const Text(
+                        'cm',
+                        style: kLabelTextStyle,
+                      )
+                    ],
+                  ),
+                  Slider(
+                    value: height.toDouble(),
+                    min: 120.0,
+                    max: 220.0,   
+                    activeColor: Color(0xFFEB1555),
+                    inactiveColor: Color(0xFF8D8E98),
+                    onChanged: (double newValue){
+                      setState(() {
+                        height = newValue.round();
+                      });
+                    },
+                  )
+                ],
               ),
             ),
           ),
@@ -100,7 +112,7 @@ class _InputPageState extends State<InputPage> {
                   child: Container(
                     margin: const EdgeInsets.all(15.0),
                     decoration: BoxDecoration(
-                      color: activeCardColor,
+                      color: kActiveCardColor,
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                   ),
@@ -109,7 +121,7 @@ class _InputPageState extends State<InputPage> {
                   child: Container(
                     margin: const EdgeInsets.all(15.0),
                     decoration: BoxDecoration(
-                      color: activeCardColor,
+                      color: kActiveCardColor,
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                   ),
@@ -118,10 +130,10 @@ class _InputPageState extends State<InputPage> {
             ),
           ),
           Container(
-            color: bottomContainerColor,
+            color: kBottomContainerColor,
             margin: const EdgeInsets.all(10.0),
             width: double.infinity,
-            height: bottomContainerHeight,
+            height: kBottomContainerHeight,
             child: const Center(child: Text('CALCULATE')),
           ),
         ],
@@ -129,5 +141,3 @@ class _InputPageState extends State<InputPage> {
     );
   }
 }
-
-//ic
