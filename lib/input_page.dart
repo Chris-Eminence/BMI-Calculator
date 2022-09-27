@@ -1,4 +1,3 @@
-
 import 'icon_content.dart';
 import 'reuseable_card.dart';
 import 'package:flutter/cupertino.dart';
@@ -14,7 +13,6 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-
   int height = 180;
   int weight = 60;
 
@@ -94,8 +92,10 @@ class _InputPageState extends State<InputPage> {
                   SliderTheme(
                     data: SliderTheme.of(context).copyWith(
                       inactiveTrackColor: const Color(0xFF8D8E98),
-                      thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 15.0),
-                      overlayShape: const RoundSliderOverlayShape(overlayRadius: 30.0),
+                      thumbShape:
+                          const RoundSliderThumbShape(enabledThumbRadius: 15.0),
+                      overlayShape:
+                          const RoundSliderOverlayShape(overlayRadius: 30.0),
                       thumbColor: const Color(0xFFEB1555),
                       overlayColor: const Color(0x29EB1555),
                       activeTrackColor: Colors.white,
@@ -103,8 +103,8 @@ class _InputPageState extends State<InputPage> {
                     child: Slider(
                       value: height.toDouble(),
                       min: 120.0,
-                      max: 220.0,   
-                      onChanged: (double newValue){
+                      max: 220.0,
+                      onChanged: (double newValue) {
                         setState(() {
                           height = newValue.round();
                         });
@@ -122,18 +122,25 @@ class _InputPageState extends State<InputPage> {
                   child: ReuseAbleCard(
                     colour: kActiveCardColor,
                     cardChild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text('WEIGHT', style: kLabelTextStyle,),
-                        Text(weight.toString(), style: kNumberTextStyle,),
-
-                          Row(
+                        const Text(
+                          'WEIGHT',
+                          style: kLabelTextStyle,
+                        ),
+                        Text(
+                          weight.toString(),
+                          style: kNumberTextStyle,
+                        ),
+                        Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          
-                          children: const [
-                          RoundIconButton(),
-                      ],)
+                          children: [
+                            RoundIconButton(icon: FontAwesomeIcons.plus),
+                            const SizedBox(width: 10.0),
+                            RoundIconButton(icon: FontAwesomeIcons.plus),
+                          ],
+                        ),
                       ],
-                                                      
                     ),
                   ),
                 ),
@@ -163,17 +170,20 @@ class _InputPageState extends State<InputPage> {
 }
 
 class RoundIconButton extends StatelessWidget {
-  const RoundIconButton({Key? key}) : super(key: key);
+  RoundIconButton({required this.icon});
+
+  final IconData icon;
   @override
   Widget build(BuildContext context) {
     return RawMaterialButton(
-      onPressed: (){},
+      child: Icon(icon),
+      onPressed: () {},
       constraints: const BoxConstraints.tightFor(
         width: 56.0,
         height: 56.0,
       ),
       shape: const CircleBorder(),
-      fillColor: const Color(0xFFFFFF),
+      fillColor: const Color(0xFF4C4F5E),
       elevation: 10.0,
     );
   }
