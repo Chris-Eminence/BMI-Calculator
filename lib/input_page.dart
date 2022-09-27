@@ -1,4 +1,3 @@
-import 'dart:html';
 
 import 'icon_content.dart';
 import 'reuseable_card.dart';
@@ -15,7 +14,10 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
+
   int height = 180;
+  int weight = 60;
+
   Gender selectedGender = Gender.noneSelected;
   @override
   Widget build(BuildContext context) {
@@ -89,17 +91,25 @@ class _InputPageState extends State<InputPage> {
                       )
                     ],
                   ),
-                  Slider(
-                    value: height.toDouble(),
-                    min: 120.0,
-                    max: 220.0,   
-                    activeColor: Color(0xFFEB1555),
-                    inactiveColor: Color(0xFF8D8E98),
-                    onChanged: (double newValue){
-                      setState(() {
-                        height = newValue.round();
-                      });
-                    },
+                  SliderTheme(
+                    data: SliderTheme.of(context).copyWith(
+                      inactiveTrackColor: const Color(0xFF8D8E98),
+                      thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 15.0),
+                      overlayShape: const RoundSliderOverlayShape(overlayRadius: 30.0),
+                      thumbColor: const Color(0xFFEB1555),
+                      overlayColor: const Color(0x29EB1555),
+                      activeTrackColor: Colors.white,
+                    ),
+                    child: Slider(
+                      value: height.toDouble(),
+                      min: 120.0,
+                      max: 220.0,   
+                      onChanged: (double newValue){
+                        setState(() {
+                          height = newValue.round();
+                        });
+                      },
+                    ),
                   )
                 ],
               ),
@@ -109,11 +119,21 @@ class _InputPageState extends State<InputPage> {
             child: Row(
               children: [
                 Expanded(
-                  child: Container(
-                    margin: const EdgeInsets.all(15.0),
-                    decoration: BoxDecoration(
-                      color: kActiveCardColor,
-                      borderRadius: BorderRadius.circular(10.0),
+                  child: ReuseAbleCard(
+                    colour: kActiveCardColor,
+                    cardChild: Column(
+                      children: [
+                        const Text('WEIGHT', style: kLabelTextStyle,),
+                        Text(weight.toString(), style: kNumberTextStyle,),
+
+                          Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          
+                          children: const [
+                          RoundIconButton(),
+                      ],)
+                      ],
+                                                      
                     ),
                   ),
                 ),
@@ -138,6 +158,23 @@ class _InputPageState extends State<InputPage> {
           ),
         ],
       ),
+    );
+  }
+}
+
+class RoundIconButton extends StatelessWidget {
+  const RoundIconButton({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return RawMaterialButton(
+      onPressed: (){},
+      constraints: const BoxConstraints.tightFor(
+        width: 56.0,
+        height: 56.0,
+      ),
+      shape: const CircleBorder(),
+      fillColor: const Color(0xFF4C4F5E),
+      elevation: 10.0,
     );
   }
 }
