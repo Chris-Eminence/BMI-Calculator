@@ -13,8 +13,12 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
+<<<<<<< HEAD
   int height = 180;
   int weight = 60;
+=======
+  late Gender selectedGender;
+>>>>>>> 4e852ad54a7b4c5642933765c0345e18381acf87
 
   Gender selectedGender = Gender.noneSelected;
   @override
@@ -38,8 +42,13 @@ class _InputPageState extends State<InputPage> {
                     },
                     child: ReuseAbleCard(
                       colour: selectedGender == Gender.male
+<<<<<<< HEAD
                           ? kActiveCardColor
                           : kInActiveCardColor,
+=======
+                          ? activeCardColor
+                          : inActiveCardColor,
+>>>>>>> 4e852ad54a7b4c5642933765c0345e18381acf87
                       cardChild: IconContent(
                           icon: FontAwesomeIcons.mars, label: 'MALE'),
                     ),
@@ -54,8 +63,13 @@ class _InputPageState extends State<InputPage> {
                     },
                     child: ReuseAbleCard(
                       colour: selectedGender == Gender.female
+<<<<<<< HEAD
                           ? kActiveCardColor
                           : kInActiveCardColor,
+=======
+                          ? activeCardColor
+                          : inActiveCardColor,
+>>>>>>> 4e852ad54a7b4c5642933765c0345e18381acf87
                       cardChild: IconContent(
                           icon: FontAwesomeIcons.venus, label: 'FEMALE'),
                     ),
