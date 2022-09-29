@@ -135,21 +135,42 @@ class _InputPageState extends State<InputPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            RoundIconButton(icon: FontAwesomeIcons.plus),
+                            RoundIconButton(icon: FontAwesomeIcons.minus),
                             const SizedBox(width: 10.0),
                             RoundIconButton(icon: FontAwesomeIcons.plus),
+
+                            
                           ],
                         ),
+                    
                       ],
                     ),
                   ),
                 ),
                 Expanded(
-                  child: Container(
-                    margin: const EdgeInsets.all(15.0),
-                    decoration: BoxDecoration(
-                      color: kActiveCardColor,
-                      borderRadius: BorderRadius.circular(10.0),
+                  child: ReuseAbleCard(
+                    colour: kActiveCardColor,
+                    cardChild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          'WEIGHT',
+                          style: kLabelTextStyle,
+                        ),
+                        Text(
+                          weight.toString(),
+                          style: kNumberTextStyle,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            RoundIconButton(icon: FontAwesomeIcons.minus),
+                            const SizedBox(width: 10.0),
+                            RoundIconButton(icon: FontAwesomeIcons.plus),
+                          ],
+                        ),
+                    
+                      ],
                     ),
                   ),
                 ),
@@ -158,7 +179,7 @@ class _InputPageState extends State<InputPage> {
           ),
           Container(
             color: kBottomContainerColor,
-            margin: const EdgeInsets.all(10.0),
+            margin: const EdgeInsets.all(15.0),
             width: double.infinity,
             height: kBottomContainerHeight,
             child: const Center(child: Text('CALCULATE')),
