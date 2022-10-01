@@ -3,6 +3,7 @@ import 'reuseable_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'constants.dart';
+import 'result_page.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 enum Gender { male, female, noneSelected }
@@ -199,12 +200,19 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          Container(
-            color: kBottomContainerColor,
-            margin: const EdgeInsets.all(15.0),
-            width: double.infinity,
-            height: kBottomContainerHeight,
-            child: const Center(child: Text('CALCULATE')),
+          GestureDetector(
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: ((context) {
+                return ResultPage();
+              }),),);
+            },
+            child: Container(
+              color: kBottomContainerColor,
+              margin: const EdgeInsets.all(15.0),
+              width: double.infinity,
+              height: kBottomContainerHeight,
+              child: const Center(child: Text('CALCULATE')),
+            ),
           ),
         ],
       ),
